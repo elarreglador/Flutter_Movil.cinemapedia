@@ -30,3 +30,14 @@ Puntualmente veremos:
 Datasources, Implementaciones , Abastracciones, Repositorios, Implementaciones, Abstracciones, Modelos, Entidades, Riverpod, Provider, StateNotifierProvider, Notifiers, Mappers, ...
 
 Todo el objetivo de la sección es poder establecer los cimientos ordenados de nuestra arquitectura para reforzarlos y verlos en la práctica.
+
+************************************
+DEV
+************************************
+
+Oviamente no voy a entregarte mi clave de acceso a la fuente de datos por lo que tendras que crear la tuya propia:
+
+1. Crear cuenta en https://www.themoviedb.org/
+2. Generar api key en Perfil y ajustes > Ajustes > API
+3. Copiar el .env.template y renombrarlo a .env
+4. Pegar la api key de themoviedb.org en nuestra variable de entorno THE_MOVIEDB_KEY
