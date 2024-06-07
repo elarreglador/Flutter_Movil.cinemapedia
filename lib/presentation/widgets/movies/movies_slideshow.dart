@@ -65,20 +65,40 @@ class _Slide extends StatelessWidget {
         decoration: decoration,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
-          child: Image.network(
-            movie.backdropPath,
-            fit: BoxFit.cover,
-            loadingBuilder: (context, child, loadingProgress){ // Durante la carga de imagenes...
-              if (loadingProgress != null ){
-                return const DecoratedBox(
-                  decoration: BoxDecoration( color: Colors.black) // ... el fondo es negro
-                );
-              }
-
-              return FadeIn(child: child);
-            },
+          child: Stack(
+            children: [
+              Image.network( //IMAGEN DEL CARRUSEL
+                movie.backdropPath,
+                fit: BoxFit.cover,
+                loadingBuilder: (context, child, loadingProgress){ // Durante la carga de imagenes...
+                  if (loadingProgress != null ){
+                    return const DecoratedBox(
+                      decoration: BoxDecoration( color: Colors.black) // ... el fondo es negro
+                    );
+                  }
+              
+                  return FadeIn(child: child);
+                },
+              ),
+              Padding( //TITULO DE LA PELICULA
+                padding: const EdgeInsets.fromLTRB(10,10,0,0),
+                child: Text(
+                  movie.title, 
+                  style: const TextStyle(
+                    color: Colors.white,
+                    shadows: [
+                      Shadow(
+                        offset: Offset(2.0, 2.0),
+                        blurRadius: 3.0,
+                        color: Colors.black,
+                      )
+                    ]
+                  )
+                ),
+              )
+            ]
           )
-          )
+        )
       ),
     );
   }
