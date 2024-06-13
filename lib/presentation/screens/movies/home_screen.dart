@@ -35,8 +35,8 @@ class _HomeViewState extends ConsumerState<_HomeView> {
   @override
   Widget build(BuildContext context) {
     // obtiene un future List con las peliculas
-    //final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
-    // en su lugar obtendremos una lista algo mas corta para que el carrusel no sea muy extenso
+    final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
+    // obtendremos una lista algo mas corta para que el carrusel no sea muy extenso
     final slideShowMovies = ref.watch(moviesSlideshowProvider);
 
     // muestra circulo de carga mientras descarga peliculas
@@ -46,7 +46,13 @@ class _HomeViewState extends ConsumerState<_HomeView> {
       children: [
         const CustomAppbar(),
 
-        MoviesSlideshow(movies: slideShowMovies)
+        MoviesSlideshow(movies: slideShowMovies),
+
+        MovieHorizontalListview(
+          movies: nowPlayingMovies,
+          title: "En cines",
+          subTitle: "jueves 13",
+        )
       ],
     );
   }
