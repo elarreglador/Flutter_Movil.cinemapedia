@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:cinemapedia/domain/entities/movie.dart';
 import 'package:flutter/material.dart';
 
@@ -19,13 +20,99 @@ class MovieHorizontalListview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 150,
+      height: 320,
       child: Column(
         children: [
           if (title != null || subTitle != null)
-            _Title(title: title,subTitle: subTitle)
+            _Title(title: title,subTitle: subTitle),
+
+          Expanded(
+            child: ListView.builder(
+              itemCount: movies.length,
+              scrollDirection: Axis.horizontal,
+              physics: const BouncingScrollPhysics(),
+              itemBuilder: (context, index) {
+                return _Slide(movie: movies[index]);
+              }
+            )
+          )
         ],
       ),
+    );
+  }
+}
+
+class _Slide extends StatelessWidget {
+
+  final Movie movie;
+
+  const _Slide({required this.movie});
+
+  @override
+  Widget build(BuildContext context) {
+
+    final textStyles = Theme.of(context).textTheme;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+
+        // Imagen
+        SizedBox(
+          width: 130,
+          height: 180,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Image.network(
+              fit: BoxFit.fill,
+              movie.posterPath,
+              width: 150,
+              loadingBuilder: (context, child, loadingProgress){
+
+                if (loadingProgress != null) {
+                  return const Padding(
+                    padding: EdgeInsets.all(1),
+                    child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
+                  );
+                }
+
+                return FadeInUp(child: child);
+              },
+            ),
+          ),
+        ),
+
+        // Separacion
+        const SizedBox(height: 5),
+
+        // Titulo
+        SizedBox(
+          width: 150,
+          child: Text(
+            movie.title,
+            maxLines: 2,
+            style: textStyles.titleSmall
+          ),
+        ),
+
+        // Puntuacion
+        Row(
+          children: [
+
+            const Icon(
+              Icons.star_half_outlined, 
+              color: Colors.orange
+            ),
+
+            Text('${movie.voteAverage}', style: textStyles.bodyMedium?.copyWith(color:Colors.orange)),
+
+            const SizedBox(width: 15),
+
+            Text("${movie.popularity}", style: textStyles.bodySmall)
+          ],
+        )
+
+      ],
     );
   }
 }
@@ -46,7 +133,10 @@ class _Title extends StatelessWidget {
         children: [
 
           if (title != null)
-            Text(title!, style:  Theme.of(context).textTheme.titleLarge),
+            Text(
+              title!, 
+              style:  Theme.of(context).textTheme.titleLarge
+            ),
 
           const Spacer(),
 
@@ -56,6 +146,7 @@ class _Title extends StatelessWidget {
               onPressed: (){}, 
               child: Text(subTitle!)
             )
+
         ],
       ),
     );

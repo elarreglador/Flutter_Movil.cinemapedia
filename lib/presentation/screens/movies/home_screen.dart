@@ -40,7 +40,11 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     final slideShowMovies = ref.watch(moviesSlideshowProvider);
 
     // muestra circulo de carga mientras descarga peliculas
-    if (slideShowMovies.isEmpty) return const CircularProgressIndicator();
+    if (slideShowMovies.isEmpty) {
+      return const Center(
+        child: CircularProgressIndicator()
+      );
+    }
 
     return Column(
       children: [
@@ -53,6 +57,8 @@ class _HomeViewState extends ConsumerState<_HomeView> {
           title: "En cines",
           subTitle: "jueves 13",
         )
+      
+        
       ],
     );
   }

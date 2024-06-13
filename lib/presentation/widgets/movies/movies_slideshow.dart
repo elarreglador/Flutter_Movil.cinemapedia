@@ -77,7 +77,7 @@ class _Slide extends StatelessWidget {
                     );
                   }
               
-                  return FadeIn(child: child);
+                  return FadeInRight(child: child);
                 },
               ),
               Padding( //TITULO DE LA PELICULA
