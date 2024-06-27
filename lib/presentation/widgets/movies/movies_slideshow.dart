@@ -1,11 +1,10 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:flutter/material.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:cinemapedia/domain/entities/movie.dart';
-import 'package:flutter/material.dart';
 
 class MoviesSlideshow extends StatelessWidget {
   final List<Movie> movies;
-
   const MoviesSlideshow({
     super.key, 
     required this.movies
@@ -14,7 +13,7 @@ class MoviesSlideshow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final colors = Theme.of(context).colorScheme; 
+    final colors = Theme.of(context).colorScheme;
 
     return SizedBox(
       height: 210,
@@ -26,14 +25,12 @@ class MoviesSlideshow extends StatelessWidget {
         pagination: SwiperPagination(
           margin: const EdgeInsets.only(top: 10),
           builder: DotSwiperPaginationBuilder(
-            activeColor: Colors.red,
-            color: colors.primary 
+            activeColor: colors.primary,
+            color: colors.secondary
           )
         ),
         itemCount: movies.length,
-        itemBuilder: (context, index){
-          return _Slide(movie: movies[index]);
-        }
+        itemBuilder: (context, index) => _Slide(movie: movies[index] ),
       ),
     );
   }
@@ -52,7 +49,7 @@ class _Slide extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
       boxShadow: const [
         BoxShadow(
-          color: Colors.black,
+          color: Colors.black45,
           blurRadius: 10,
           offset: Offset(0,5)
         )
@@ -65,38 +62,17 @@ class _Slide extends StatelessWidget {
         decoration: decoration,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
-          child: Stack(
-            children: [
-              Image.network( //IMAGEN DEL CARRUSEL
-                movie.backdropPath,
-                fit: BoxFit.cover,
-                loadingBuilder: (context, child, loadingProgress){ // Durante la carga de imagenes...
-                  if (loadingProgress != null ){
-                    return const DecoratedBox(
-                      decoration: BoxDecoration( color: Colors.black) // ... el fondo es negro
-                    );
-                  }
-              
-                  return FadeInRight(child: child);
-                },
-              ),
-              Padding( //TITULO DE LA PELICULA
-                padding: const EdgeInsets.fromLTRB(10,10,0,0),
-                child: Text(
-                  movie.title, 
-                  style: const TextStyle(
-                    color: Colors.white,
-                    shadows: [
-                      Shadow(
-                        offset: Offset(2.0, 2.0),
-                        blurRadius: 3.0,
-                        color: Colors.black,
-                      )
-                    ]
-                  )
-                ),
-              )
-            ]
+          child: Image.network(
+            movie.backdropPath,
+            fit: BoxFit.cover,
+            loadingBuilder: (context, child, loadingProgress) {
+              if ( loadingProgress != null ) {
+                return const DecoratedBox(
+                  decoration: BoxDecoration( color: Colors.black12 )
+                );
+              }
+              return FadeIn(child: child);
+            },
           )
         )
       ),
