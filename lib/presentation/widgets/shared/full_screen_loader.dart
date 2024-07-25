@@ -6,12 +6,12 @@ class FullScreenLoader extends StatelessWidget {
 
   Stream<String> getLoadingMessages() {
     final messages = <String>[
-      "Despejando agenda...",
-      "Preparando las palomitas",
-      "Verificando si se requiere mantita",
-      "Ya casi lo tenemos, has puesto el movil en silencio?",
-      "Palomitas hechas",
-      "Todo listo!"
+      ".",
+      "..",
+      "...",
+      "....",
+      ".....",
+      "......"
     ];
 
     // Envia al stream cada pocas milesimas uno de los mensajes anteriores

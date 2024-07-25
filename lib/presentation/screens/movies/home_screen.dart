@@ -37,6 +37,10 @@ class _HomeViewState extends ConsumerState<_HomeView> {
 
   @override
   Widget build(BuildContext context) {
+
+    // valor booleano verificando si hay peliculas en los listados
+    final initialLoading = ref.watch(initialLoadingProvider);
+
     // obtiene un future List con las peliculas
     final slideShowMovies = ref.watch(moviesSlideshowProvider);
     final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
@@ -44,13 +48,10 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     final topRatedMovies = ref.watch(topRatedMoviesProvider);
     final upcomingMovies = ref.watch(upcomingMoviesProvider);
 
-    // muestra circulo de carga mientras descarga peliculas
-    if (slideShowMovies.isEmpty) {
-      return const Center(child: CircularProgressIndicator());
-    }
+    // muestra pantalla de carga hasta que se carguen los listados de peliculas
+    if (initialLoading) return const FullScreenLoader();
 
-    return FullScreenLoader();
-
+    // CUERPO DE LA APP
     // Se requiere el CustomScrollView para usar un *SliverAppBar* que aparezca/desaparezca
     // mostrando nuestro CustomAppbar() al deslizar arriba y abajo el scroll
     return CustomScrollView(slivers: [
