@@ -49,6 +49,8 @@ class _HomeViewState extends ConsumerState<_HomeView> {
       return const Center(child: CircularProgressIndicator());
     }
 
+    return FullScreenLoader();
+
     // Se requiere el CustomScrollView para usar un *SliverAppBar* que aparezca/desaparezca
     // mostrando nuestro CustomAppbar() al deslizar arriba y abajo el scroll
     return CustomScrollView(slivers: [
