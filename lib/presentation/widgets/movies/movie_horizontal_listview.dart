@@ -1,5 +1,5 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:cinemapedia/config/helpers/Human_formmats.dart';
+import 'package:cinemapedia/config/helpers/human_formmats.dart';
 import 'package:cinemapedia/domain/entities/movie.dart';
 import 'package:flutter/material.dart';
 

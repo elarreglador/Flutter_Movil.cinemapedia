@@ -1,4 +1,5 @@
 {
     "java.compile.nullAnalysis.mode": "automatic",
-    "cmake.sourceDirectory": "/home/elarreglador/Escritorio/Cursos/Flutter/Flutter_movil/cinemapedia/linux"
+    "cmake.sourceDirectory": "/home/elarreglador/Escritorio/Cursos/Flutter/Flutter_movil/cinemapedia/linux",
+    "cmake.ignoreCMakeListsMissing": true
 }
